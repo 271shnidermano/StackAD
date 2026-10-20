@@ -1,7 +1,8 @@
 public interface StackInterface<T>
 {
+
     // returns the logical size of the stack
-    int size();    
+    int size(); 
     
     // tests if this stack is empty
     boolean empty();
