@@ -46,6 +46,11 @@ public class ArrayStack<T> implements StackInterface<T>
             T pushed = stack[size-1];
             stack[size-1]=null;
             size--;
+            int quarterOfMemory = (this.stack.length) / 4;
+            if (size < quarterOfMemory)
+            {
+                halfLength();
+            } 
             return pushed;
         }
     }
@@ -53,6 +58,11 @@ public class ArrayStack<T> implements StackInterface<T>
     @Override 
     public T push(T item)
     {
+        
+        if (size == this.stack.length)
+        {
+            doubleLength();
+        }
         stack[size]=item;
         size++;
         return item;
@@ -62,11 +72,7 @@ public class ArrayStack<T> implements StackInterface<T>
     @Override 
     public void clear()
     {
-        while(size>=0)
-        {
-            stack[size-1]=null;
-            size--;
-        }
+        stack = (T[]) new Object[10];
         size=0;
     }
  
@@ -83,5 +89,26 @@ public class ArrayStack<T> implements StackInterface<T>
             count--;
         }
         return -1;
+    }
+
+    public void doubleLength()
+    {
+        int length = stack.length;
+        T[] tempArray = (T[]) new Object[length*2];
+        for(int i = 0; i<this.stack.length; i++)
+        {
+            tempArray[i]=this.stack[i];
+        }
+        this.stack=tempArray; 
+    }
+    public void halfLength()
+    {
+        int length = this.stack.length;
+        T[] tempArray = (T[]) new Object[length/2];
+        for(int i = 0; i<this.size; i++)
+        {
+            tempArray[i]=this.stack[i];
+        }
+        this.stack=tempArray; 
     }
 }
