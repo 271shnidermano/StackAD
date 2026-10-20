@@ -68,24 +68,23 @@ public class LinkedStack<T> implements StackInterface<T>
         size=0;
     }
  
-    @Override 
+    @Override
     public int search(Object o)
     {
         int count = 0;
-        if(size!=0){
         LLNode<T> using = top.getLink();
-        T matchData = (T)(o);
-        while(count<size)
+
+        while (using != null)
         {
-            if(using.getInfo().equals(matchData))
+            if ((using.getInfo() == null && o == null)|| (using.getInfo() != null && using.getInfo().equals(o)))
             {
-                return count;
+                return count+1;
             }
+
             using = using.getLink();
             count++;
         }
+
         return -1;
-        }
-        throw new StackUnderflowException("Stack is empty");
     }
 }
