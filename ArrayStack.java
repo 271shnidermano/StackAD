@@ -79,16 +79,19 @@ public class ArrayStack<T> implements StackInterface<T>
     @Override 
     public int search(Object o)
     {
-        int count = size-1;
-        while(count>=0)
+        if(size!=0){
+        int count = 0;
+        while(count<size)
         {
-            if(stack[count]== o)
+            if(stack[count].equals((T)(o)))
             {
                 return count;
             }
-            count--;
+            count++;
         }
         return -1;
+        }
+        throw new StackUnderflowException("Stack is empty");
     }
 
     public void doubleLength()
